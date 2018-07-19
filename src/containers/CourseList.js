@@ -8,6 +8,7 @@ class CourseList extends React.Component {
         this.courseService = CourseService.instance;
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
+        this.deleteCourse = this.deleteCourse.bind(this);
     }
 
     componentDidMount() {
@@ -66,11 +67,15 @@ class CourseList extends React.Component {
         return (
             <div className="container-fluid">
                 <nav className="navbar navbar-dark bg-primary justify-content-between">
-                    <h1 style={{color: "white"}}>Course Manager</h1>
+                    <h1 style={{color: "white"}}>WhiteBoard</h1>
                     <form className="form-inline">
-                        <input onChange={this.titleChanged} className="form-control mr-sm-2" id="titleFld"
+                        <input onChange={this.titleChanged}
+                               className="form-control mr-sm-2"
+                               id="titleFld"
                                placeholder="Add Course Title"/>
-                        <button className="btn btn-success my-2 my-sm-0" onClick={this.createCourse} type="button">Add
+                        <button className="btn btn-success my-2 my-sm-0"
+                                onClick={this.createCourse}
+                                type="button">Add
                         </button>
                     </form>
                 </nav>

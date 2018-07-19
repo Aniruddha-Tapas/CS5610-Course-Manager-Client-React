@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import ModuleService from '../services/ModuleService'
+import React, {Component} from 'react';
+import ModuleService from '../services/ModuleService';
 import ModuleListItem from '../components/ModuleListItem';
 
 class ModuleList extends Component {
@@ -7,76 +7,92 @@ class ModuleList extends Component {
         super(props);
         this.state = {
             courseId: '',
-            module: { title: '' },
+            courseTitle: '',
+            module: {title: ''},
             modules: []
         };
         this.moduleService = ModuleService.instance;
         this.createModule = this.createModule.bind(this);
-        this.deleteModule = this.createModule.bind(this);
-        this.moduleTitleChanged = this.moduleTitleChanged.bind(this);
-        this.setCourseId =
-            this.setCourseId.bind(this);
-
-    }
-    setModules(modules) {
-        this.setState({modules: modules})
+        this.deleteModule = this.deleteModule.bind(this);
+        this.setCourseId = this.setCourseId.bind(this);
+        this.setModuleTitle = this.setModuleTitle.bind(this);
     }
 
-    findAllModulesForCourse(courseId) {
-        this.moduleService
-            .findAllModulesForCourse(courseId)
-            .then((modules) => {this.setModules(modules)});
+    componentDidMount() {
+        this.setCourseId(this.props.courseId);
+        this.setCourseTitle(this.props.courseTitle);
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setCourseId(newProps.courseId);
+        this.setCourseTitle(newProps.courseTitle);
+        this.findAllModulesForCourse(newProps.courseId);
     }
 
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
 
-    componentDidMount() {
-        this.setCourseId(this.props.courseId);
-    }
-    componentWillReceiveProps(newProps){
-        this.setCourseId(newProps.courseId);
-        this.findAllModulesForCourse(newProps.courseId)
+    setCourseTitle(courseTitle) {
+        this.setState({courseTitle: courseTitle})
     }
 
     createModule() {
-        //console.log(this.state.module);
         this.moduleService
-            .createModule(this.props.courseId, this.state.module)
+            .createModule(this.state.courseId, this.state.module)
             .then(() => this.findAllModulesForCourse(this.state.courseId));
     }
 
-    deleteModule(moduleId){
-        this.moduleService
-            .deleteModule(moduleId)
-            .then(() => this.findAllModulesForCourse(this.state.courseId));
+    deleteModule(moduleId) {
+        if (window.confirm("Do you want to delete this module?")) {
+            this.moduleService
+                .deleteModule(moduleId)
+                .then(() => this.findAllModulesForCourse(this.state.courseId))
+        }
     }
 
-    moduleTitleChanged(event) {
-        //console.log(event.target.value);
-        this.setState({module: {title: event.target.value}});
+    setModules(modules) {
+        this.setState({modules: modules})
+    }
+
+    setModuleTitle(event) {
+        this.setState({
+            module: {
+                title: event.target.value
+            }
+        });
+    }
+
+    findAllModulesForCourse(courseId) {
+        this.moduleService
+            .findAllModulesForCourse(courseId)
+            .then((modules) => {
+                this.setState({modules: modules})
+            });
     }
 
     renderListOfModules() {
-        let modules = this.state.modules.map(function(module){
-            return <ModuleListItem module={module}
-                                   key={module.id}
-            delete = {this.deleteModule}/>
-        });
+        let modules =
+            this.state.modules.map((module) => {
+                return (<ModuleListItem key={module.id}
+                                        module={module}
+                                        courseId={this.state.courseId}
+                                        delete={this.deleteModule}/>)
+            });
         return modules;
     }
+
     render() {
         return (
-            <div>
-                <h4>Module List for course: {this.state.courseId}</h4>
-                <input onChange={this.moduleTitleChanged}
-                       placeholder="New Module Name"
-                       className="form-control mr-sm-2 mb-2"/>
+            <div className="p-2">
+                <h4>Modules of {this.state.courseTitle}</h4>
+                <input placeholder="New Module Name"
+                       className="form-control mr-sm-2 mb-2"
+                       onChange={this.setModuleTitle}>
+                </input>
                 <button type="button"
-                        onClick={this.createModule}
-                        className="btn btn-outline-primary btn-block">
-                    <i className="fa fa-plus"></i>
+                        className="btn btn-primary btn-block"
+                        onClick={this.createModule}>
                     Create
                 </button>
                 <br/>
@@ -84,7 +100,7 @@ class ModuleList extends Component {
                     {this.renderListOfModules()}
                 </ul>
             </div>
-        );
+        )
     }
 }
 
