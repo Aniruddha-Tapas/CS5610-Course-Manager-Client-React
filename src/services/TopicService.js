@@ -1,10 +1,10 @@
-const LESSON_MID_URL =
-    'http://localhost:8080/api/module/MID/lesson';
+const TOPIC_LID_URL =
+    'http://localhost:8080/api/lesson/LID/topic';
 
-const LESSON_URL = 'http://localhost:8080/api/lesson';
+const TOPIC_URL = 'http://localhost:8080/api/topic';
 
 let _singleton = Symbol();
-export default class LessonService {
+export default class TopicService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
@@ -12,13 +12,13 @@ export default class LessonService {
 
     static get instance() {
         if (!this[_singleton])
-            this[_singleton] = new LessonService(_singleton);
+            this[_singleton] = new TopicService(_singleton);
         return this[_singleton]
     }
 
-    createLesson(moduleId, lesson) {
-        return fetch(LESSON_MID_URL.replace('MID', moduleId), {
-            body: JSON.stringify(lesson),
+    createTopic(lessonId, topic) {
+        return fetch(TOPIC_LID_URL.replace('LID', lessonId), {
+            body: JSON.stringify(topic),
             headers: {'Content-Type': 'application/json'},
             method: 'POST'
         }).then(function (response) {
@@ -26,32 +26,32 @@ export default class LessonService {
         })
     }
 
-    deleteLesson(lessonId) {
-        return fetch(LESSON_URL + '/' + lessonId, {
+    deleteTopic(topicId) {
+        return fetch(TOPIC_URL + '/' + topicId, {
             method: 'DELETE'
         })
     }
 
-    findAllLessonsForModule(moduleId) {
+    findAllTopicsForLesson(lessonId) {
         return fetch(
-            LESSON_MID_URL
-                .replace('MID', moduleId))
+            TOPIC_LID_URL
+                .replace('LID', lessonId))
             .then(function (response) {
                 return response.json();
             })
     }
 
-    findLessonById(lessonId) {
-        return fetch(LESSON_URL + '/' + lessonId)
+    findTopicById(topicId) {
+        return fetch(TOPIC_URL + '/' + topicId)
             .then(function (response) {
                 return response.json();
             })
     }
 
-    updateLesson(lessonId, lesson) {
-        return fetch(LESSON_URL + '/' + lessonId, {
+    updateTopic(topicId, topic) {
+        return fetch(TOPIC_URL + '/' + topicId, {
             method: 'put',
-            body: JSON.stringify(lesson),
+            body: JSON.stringify(topic),
             headers: {
                 'content-type': 'application/json'
             }

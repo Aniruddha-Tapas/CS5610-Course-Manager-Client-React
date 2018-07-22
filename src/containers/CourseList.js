@@ -64,35 +64,38 @@ class CourseList extends React.Component {
     }
 
     render() {
+        document.body.style.backgroundColor = "#e9ecef";
         return (
-            <div className="container-fluid">
+            <div className="bg-light">
                 <nav className="navbar navbar-dark bg-primary justify-content-between">
                     <h1 style={{color: "white"}}>WhiteBoard</h1>
                     <form className="form-inline">
                         <input onChange={this.titleChanged}
                                className="form-control mr-sm-2"
                                id="titleFld"
-                               placeholder="Add Course Title"/>
+                               placeholder="New Course Title"/>
                         <button className="btn btn-success my-2 my-sm-0"
                                 onClick={this.createCourse}
                                 type="button">Add
                         </button>
                     </form>
                 </nav>
-                <h2>CourseList</h2>
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Created On</th>
-                        <th>Last Modified</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderCourseRows()}
-                    </tbody>
-                </table>
+                <div className="jumbotron">
+                    <h3>List of Courses:</h3>
+                    <table className="table shadow-lg p-3 mb-5 bg-white rounded">
+                        <thead className="bg-white">
+                        <tr>
+                            <th>Title</th>
+                            <th>Created On</th>
+                            <th>Last Modified</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody className="bg-white">
+                        {this.renderCourseRows()}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }

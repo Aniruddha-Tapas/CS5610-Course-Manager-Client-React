@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ModuleListItem extends React.Component {
+class TopicPillItem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -10,9 +10,9 @@ class ModuleListItem extends React.Component {
         return (
             <li className="nav-item">
                 <div>
-                    <a className="nav-link text-dark"
+                    <a className="nav-link"
                        href="#"> {this.props.lesson.title}
-                        <span className="float-right text-dark">
+                        <span className="float-right">
                             <i className="fa fa-trash ml-2"
                                onClick={() => this.props.delete(this.props.lesson.id)}>
                             </i>
@@ -24,4 +24,4 @@ class ModuleListItem extends React.Component {
     }
 }
 
-export default ModuleListItem;
+export default TopicPillItem;

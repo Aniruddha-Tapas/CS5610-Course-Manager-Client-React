@@ -29,14 +29,6 @@ class ModuleList extends Component {
         this.findAllModulesForCourse(newProps.courseId);
     }
 
-    setCourseId(courseId) {
-        this.setState({courseId: courseId});
-    }
-
-    setCourseTitle(courseTitle) {
-        this.setState({courseTitle: courseTitle})
-    }
-
     createModule() {
         this.moduleService
             .createModule(this.state.courseId, this.state.module)
@@ -49,6 +41,14 @@ class ModuleList extends Component {
                 .deleteModule(moduleId)
                 .then(() => this.findAllModulesForCourse(this.state.courseId))
         }
+    }
+
+    setCourseId(courseId) {
+        this.setState({courseId: courseId});
+    }
+
+    setCourseTitle(courseTitle) {
+        this.setState({courseTitle: courseTitle})
     }
 
     setModules(modules) {
@@ -84,14 +84,14 @@ class ModuleList extends Component {
 
     render() {
         return (
-            <div className="p-2">
+            <div className="p-2 m-1" >
                 <h4>Modules of {this.state.courseTitle}</h4>
-                <input placeholder="New Module Name"
-                       className="form-control mr-sm-2 mb-2"
+                <input placeholder="New Module Title"
+                       className="form-control mr-sm-2 mb-2 border"
                        onChange={this.setModuleTitle}>
                 </input>
                 <button type="button"
-                        className="btn btn-primary btn-block"
+                        className="btn btn-outline-success btn-block"
                         onClick={this.createModule}>
                     Create
                 </button>

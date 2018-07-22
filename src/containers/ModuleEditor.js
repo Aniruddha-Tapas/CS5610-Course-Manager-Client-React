@@ -2,6 +2,7 @@ import React from 'react'
 import LessonTabs from './LessonTabs'
 import ModuleService from '../services/ModuleService';
 import CourseService from '../services/CourseService';
+import TopicPills from './TopicPills'
 
 class ModuleEditor extends React.Component {
 
@@ -61,9 +62,10 @@ class ModuleEditor extends React.Component {
 
     render() {
         return (
-            <div className="bg-dark container-fluid p-2" style={{height: '100%'}}>
+            <div className=" border border-primary shadow-lg p-3 mb-5 rounded container-fluid p-2" style={{height: '100%'}}>
                 <h4 className="container-fluid">Editing Module: {this.state.module.title}</h4>
                 <LessonTabs moduleId={this.state.moduleId}/>
+
             </div>
         )
     }

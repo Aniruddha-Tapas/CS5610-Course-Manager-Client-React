@@ -9,7 +9,7 @@ class ModuleListItem extends Component {
 
     render() {
         return (
-            <li className="list-group-item m-1">
+            <li className="list-group-item list-group-item-action m-1 rounded">
                 <Link to={`/course/${this.props.courseId}/edit/${this.props.module.id}/edit`}>
                     {this.props.module.title}
                 </Link>

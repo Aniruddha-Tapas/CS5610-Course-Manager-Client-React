@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import LessonService from '../services/LessonService';
 import LessonTabItem from '../components/LessonTabItem'
+import TopicPillItem from "../components/TopicPillItem";
 
 class LessonTabs extends Component {
 
@@ -81,27 +82,45 @@ class LessonTabs extends Component {
         return lessons;
     }
 
+
+    renderListOfTopics() {
+        let topics =
+            this.state.lessons.map((lesson) => {
+                return (<TopicPillItem key={lesson.id}
+                                       lesson={lesson}
+                                       delete={this.deleteLesson}/>)
+            });
+        return topics;
+    }
+
     render() {
         return (
             <div style={{width: '100%', height: '100%'}}>
-                <nav className="navbar navbar-dark bg-dark justify-content-between">
+                <nav className="navbar justify-content-between">
                     <form className="form-inline" style={{width: '100%'}}>
                         <input placeholder="New Lesson Title"
-                               className="form-control"
+                               className="form-control border"
                                onChange={this.setLessonTitle}
                                style={{width: '80%'}}/>
                         <button type="button"
-                                className="btn btn-primary btn-block ml-4"
+                                className="btn btn-outline-success btn-block ml-4"
                                 onClick={this.createLesson}
                                 style={{width: '15%'}}>
                             Create
                         </button>
                     </form>
                 </nav>
+
                 <hr className="bg-white"/>
                 <div className="container-fluid" style={{width: '100%', height: '100%'}}>
                     <ul className="nav nav-tabs">
                         {this.renderListOfLesson()}
+                    </ul>
+                </div>
+
+                <div className="container-fluid" style={{width: '100%', height: '100%'}}>
+                    <ul className="nav nav-tabs">
+                        {this.renderListOfTopics()}
                     </ul>
                 </div>
             </div>
