@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import CourseService from '../services/CourseService';
 import ModuleList from './ModuleList';
 import ModuleEditor from './ModuleEditor';
+import LessonEditor from "./LessonEditor";
+
 
 class CourseEditor extends Component {
 
@@ -37,7 +39,7 @@ class CourseEditor extends Component {
         return (
             <Router>
                 <div>
-                    <div className="navbar navbar-dark bg-primary text-white mb-3 justify-content-between">
+                    <div className="navbar navbar-dark bg-primary text-white mb-5 justify-content-between">
                         <h1>Course: {this.state.course.title}</h1>
                     </div>
                     <div className="container-fluid" tyle={{height: '100%'}}>
@@ -50,6 +52,10 @@ class CourseEditor extends Component {
                             <div className="col-8" style={{height: '100%', width: '100%'}}>
                                 <Route path="/course/:courseId/edit/:moduleId/edit"
                                        component={ModuleEditor}>
+                                </Route>
+
+                                <Route path="/course/:courseId/edit/:moduleId/edit/:lessonId/edit"
+                                       component={LessonEditor}>
                                 </Route>
                             </div>
                         </div>

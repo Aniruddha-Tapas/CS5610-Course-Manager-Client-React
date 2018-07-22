@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import LessonService from '../services/LessonService';
 import LessonTabItem from '../components/LessonTabItem'
-import TopicPillItem from "../components/TopicPillItem";
 
 class LessonTabs extends Component {
 
@@ -13,6 +12,7 @@ class LessonTabs extends Component {
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.state = {
             moduleId: '',
+            moduleTitle: '',
             lessons: [],
             lesson: {
                 title: ''
@@ -77,21 +77,13 @@ class LessonTabs extends Component {
             this.state.lessons.map((lesson) => {
                 return (<LessonTabItem key={lesson.id}
                                        lesson={lesson}
+                                       courseId={this.props.courseId}
+                                       moduleId={this.state.moduleId}
                                        delete={this.deleteLesson}/>)
             });
         return lessons;
     }
 
-
-    renderListOfTopics() {
-        let topics =
-            this.state.lessons.map((lesson) => {
-                return (<TopicPillItem key={lesson.id}
-                                       lesson={lesson}
-                                       delete={this.deleteLesson}/>)
-            });
-        return topics;
-    }
 
     render() {
         return (
@@ -112,17 +104,13 @@ class LessonTabs extends Component {
                 </nav>
 
                 <hr className="bg-white"/>
+
                 <div className="container-fluid" style={{width: '100%', height: '100%'}}>
                     <ul className="nav nav-tabs">
                         {this.renderListOfLesson()}
                     </ul>
                 </div>
 
-                <div className="container-fluid" style={{width: '100%', height: '100%'}}>
-                    <ul className="nav nav-tabs">
-                        {this.renderListOfTopics()}
-                    </ul>
-                </div>
             </div>
         )
     }

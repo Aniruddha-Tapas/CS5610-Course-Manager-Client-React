@@ -1,41 +1,50 @@
 import React from 'react'
-import LessonTabs from './LessonTabs'
 import ModuleService from '../services/ModuleService';
 import CourseService from '../services/CourseService';
-import TopicPills from './TopicPills'
-import LessonEditor from "./LessonEditor";
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import LessonService from  '../services/LessonService';
+import LessonTabs from './LessonTabs';
+import TopicPills from "./TopicPills";
 
-class ModuleEditor extends React.Component {
+class LessonEditor extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             courseId: '',
             moduleId: '',
+            lessonId: '',
             module: '',
-            course: ''
+            course: '',
+            lesson: ''
         }
+
+        this.lessonService = LessonService.instance;
         this.moduleService = ModuleService.instance;
         this.courseService = CourseService.instance;
         this.setCourse = this.setCourse.bind(this);
         this.setModule = this.setModule.bind(this);
+        this.setLesson = this.setLesson.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
+        this.setLessonId = this.setLessonId.bind(this);
     }
 
     componentDidMount() {
         this.setCourse(this.props.match.params.courseId);
         this.setModule(this.props.match.params.moduleId);
+        this.setLesson(this.props.match.params.lessonId);
         this.setCourseId(this.props.match.params.courseId);
         this.setModuleId(this.props.match.params.moduleId);
+        this.setLessonId(this.props.match.params.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
         this.setCourse(newProps.match.params.courseId);
         this.setModule(newProps.match.params.moduleId);
+        this.setLesson(newProps.match.params.lessonId);
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
+        this.setLesson(newProps.match.params.lessonId);
     }
 
     setCourse(courseId) {
@@ -54,6 +63,14 @@ class ModuleEditor extends React.Component {
             })
     }
 
+    setLesson(lessonId) {
+        this.lessonService
+            .findLessonById(lessonId)
+            .then((lesson) => {
+                this.setState({lesson: lesson})
+            })
+    }
+
     setCourseId(courseId) {
         this.setState({courseId: courseId});
     }
@@ -62,13 +79,16 @@ class ModuleEditor extends React.Component {
         this.setState({moduleId: moduleId});
     }
 
+    setLessonId(lessonId) {
+        this.setState({lessonId: lessonId});
+    }
+
     render() {
         return (
             <div className=" border border-primary shadow-lg p-3 mb-5 rounded container-fluid p-2" style={{height: '100%'}}>
-                <h4 className="container-fluid">Lessons of Module: {this.state.module.title}</h4>
+                <h4 className="container-fluid">Topics of Lesson: {this.state.lesson.title}</h4>
 
-                <LessonTabs moduleId={this.state.moduleId} courseId={this.state.courseId}/>
-
+                <TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
 
 
             </div>
@@ -76,4 +96,4 @@ class ModuleEditor extends React.Component {
     }
 }
 
-export default ModuleEditor;
+export default LessonEditor;

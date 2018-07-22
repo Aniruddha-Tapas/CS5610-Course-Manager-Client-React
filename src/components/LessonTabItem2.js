@@ -1,6 +1,7 @@
+
 import React from 'react';
 
-class TopicPillItem extends React.Component {
+class LessonTabItem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -10,11 +11,11 @@ class TopicPillItem extends React.Component {
         return (
             <li className="nav-item">
                 <div>
-                    <a className="nav-link"
-                       href="#"> {this.props.topic.title}
-                        <span className="float-right text-danger">
+                    <a className="nav-link text-dark"
+                       href="#"> {this.props.lesson.title}
+                        <span className="float-right text-dark">
                             <i className="fa fa-trash ml-2"
-                               onClick={() => this.props.delete(this.props.topic.id)}>
+                               onClick={() => this.props.delete(this.props.lesson.id)}>
                             </i>
                         </span>
                     </a>
@@ -24,4 +25,4 @@ class TopicPillItem extends React.Component {
     }
 }
 
-export default TopicPillItem;
+export default LessonTabItem;
