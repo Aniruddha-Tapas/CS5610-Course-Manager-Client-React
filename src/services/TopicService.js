@@ -1,3 +1,6 @@
+const TOPIC_CID_MID_LID_URL =
+    'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
+
 const TOPIC_LID_URL =
     'http://localhost:8080/api/lesson/LID/topic';
 
@@ -16,8 +19,12 @@ export default class TopicService {
         return this[_singleton]
     }
 
-    createTopic(lessonId, topic) {
-        return fetch(TOPIC_LID_URL.replace('LID', lessonId), {
+    createTopic(courseId, moduleId, lessonId, topic) {
+        return fetch(
+            TOPIC_CID_MID_LID_URL
+                .replace('CID', courseId)
+                .replace('MID', moduleId)
+                .replace('LID', lessonId), {
             body: JSON.stringify(topic),
             headers: {'Content-Type': 'application/json'},
             method: 'POST'
@@ -32,12 +39,16 @@ export default class TopicService {
         })
     }
 
-    findAllTopicsForLesson(lessonId) {
+    findAllTopicsForLesson(courseId, moduleId, lessonId) {
         return fetch(
-            TOPIC_LID_URL
+            TOPIC_CID_MID_LID_URL
+                .replace('CID', courseId)
+                .replace('MID', moduleId)
                 .replace('LID', lessonId))
             .then(function (response) {
-                return response.json();
+                return response.text().then(function (text) {
+                    return text ? JSON.parse(text) : []
+                });
             })
     }
 

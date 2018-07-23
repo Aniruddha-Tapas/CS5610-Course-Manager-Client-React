@@ -48,8 +48,8 @@ class CourseService {
 
 
     updateCourse(courseId, course) {
-        return fetch(COURSE_API_URL + '/' + courseId, {
-            method: 'put',
+        return fetch(COURSE_API_URL + "/" + courseId, {
+            method: 'PUT',
             body: JSON.stringify(course),
             headers: {
                 'content-type': 'application/json'

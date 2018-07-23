@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TopicService from  '../services/TopicService'
+import TopicService from '../services/TopicService'
 import TopicPillItem from "../components/TopicPillItem";
 
 class TopicPills extends Component {
@@ -12,6 +12,8 @@ class TopicPills extends Component {
         this.deleteTopic = this.deleteTopic.bind(this);
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.state = {
+            courseId: '',
+            moduleId: '',
             lessonId: '',
             lessonTitle: '',
             topics: [],
@@ -22,38 +24,70 @@ class TopicPills extends Component {
     }
 
     componentDidMount() {
+        console.log("TopicPills componentDidMount");
+        this.setCourseId(this.props.courseId);
+        this.setModuleId(this.props.moduleId);
         this.setLessonId(this.props.lessonId);
     }
 
     componentWillReceiveProps(newProps) {
+        this.setCourseId(newProps.courseId);
+        this.setModuleId(newProps.moduleId);
         this.setLessonId(newProps.lessonId);
-        this.findAllTopicsForLesson(newProps.lessonId);
+        this.findAllTopicsForLesson(newProps.courseId, newProps.moduleId, newProps.lessonId);
     }
-    
+
+    setCourseId(courseId) {
+        this.setState({courseId: courseId});
+    }
+
+    setModuleId(moduleId) {
+        this.setState({moduleId: moduleId});
+    }
+
     setLessonId(lessonId) {
         this.setState({lessonId: lessonId});
     }
-    
+
     createTopic() {
-        if (this.state.topic.title === '') {
+        if (this.state.topic.title === "") {
             this.topicService
-                .createTopic(this.state.lessonId, {
-                    title: 'Default Template'
-                })
-                .then(() => this.findAllTopicsForLesson(this.state.lessonId));
+                .createTopic(
+                    this.state.courseId,
+                    this.state.moduleId,
+                    this.state.lessonId, {
+                        title: 'Default Topic'
+                    })
+                .then(() =>
+                    this.findAllTopicsForLesson(
+                        this.state.courseId,
+                        this.state.moduleId,
+                        this.state.lessonId));
         }
         else {
             this.topicService
-                .createTopic(this.state.lessonId, this.state.topic)
-                .then(() => this.findAllTopicsForLesson(this.state.lessonId));
+                .createTopic(
+                    this.state.courseId,
+                    this.state.moduleId,
+                    this.state.lessonId,
+                    this.state.topic)
+                .then(() =>
+                    this.findAllTopicsForLesson(
+                        this.state.courseId,
+                        this.state.moduleId,
+                        this.state.lessonId));
         }
     }
 
     deleteTopic(topicId) {
         if (window.confirm("Do you want to delete this topic?")) {
             this.topicService
-                .deleteLesson(topicId)
-                .then(() => this.findAllTopicsForLesson(this.state.lessonId))
+                .deleteTopic(topicId)
+                .then(() =>
+                    this.findAllTopicsForLesson(
+                        this.state.courseId,
+                        this.state.moduleId,
+                        this.state.lessonId));
         }
     }
 
@@ -65,28 +99,31 @@ class TopicPills extends Component {
         });
     }
 
-
-    findAllTopicsForLesson(lessonId) {
+    findAllTopicsForLesson(courseId, moduleId, lessonId) {
         this.topicService
-            .findAllTopicsForLesson(lessonId)
+            .findAllTopicsForLesson(courseId, moduleId, lessonId)
             .then((topics) => {
                 this.setState({topics: topics})
             });
     }
 
     renderListOfTopics() {
-        let topics =
-            this.state.topics.map((topic) => {
-                return (<TopicPillItem key={topic.id}
-                                       topic={topic}
-                                       courseId={this.props.courseId}
-                                       moduleId={this.props.moduleId}
-                                       lessonId={this.state.moduleId}
-                                       delete={this.deleteTopic}/>)
-            });
-        return topics;
-    }
+        let topics = null;
 
+        //console.log("renderListOfTopics", this.state.topics)
+        if (this.state.topics) {
+            topics = this.state.topics.map(
+                function (topic) {
+                    return (<TopicPillItem key={topic.id}
+                                           topic={topic}
+                                           courseId={this.state.courseId}
+                                           moduleId={this.state.moduleId}
+                                           lessonId={this.state.lessonId}
+                                           delete={this.deleteTopic}/>)
+                }, this);
+        }
+        return (topics)
+    }
 
     render() {
         return (

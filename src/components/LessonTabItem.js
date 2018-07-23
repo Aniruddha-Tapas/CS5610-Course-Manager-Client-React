@@ -10,11 +10,10 @@ class LessonTabItem extends React.Component {
     render() {
         return (
             <li className="nav-item">
-
                 <Link className="nav-link text-dark" to={`/course/${this.props.courseId}/edit/${this.props.moduleId}/edit/${this.props.lesson.id}/edit`}>
                     {this.props.lesson.title}
-                    <span className="float-right text-danger">
-                    <i className="fa fa-trash ml-2"
+                    <span className="float-right">
+                    <i className="fa fa-trash ml-2 text-danger"
                        onClick={() => this.props.delete(this.props.lesson.id)}>
                     </i>
                 </span>

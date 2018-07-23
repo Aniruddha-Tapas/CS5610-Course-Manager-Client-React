@@ -1,3 +1,6 @@
+const LESSON_CID_MID_URL =
+    'http://localhost:8080/api/course/CID/module/MID/lesson';
+
 const LESSON_MID_URL =
     'http://localhost:8080/api/module/MID/lesson';
 
@@ -16,12 +19,15 @@ export default class LessonService {
         return this[_singleton]
     }
 
-    createLesson(moduleId, lesson) {
-        return fetch(LESSON_MID_URL.replace('MID', moduleId), {
-            body: JSON.stringify(lesson),
-            headers: {'Content-Type': 'application/json'},
-            method: 'POST'
-        }).then(function (response) {
+    createLesson(courseId, moduleId, lesson) {
+        return fetch(
+            LESSON_CID_MID_URL
+                .replace('CID', courseId)
+                .replace('MID', moduleId), {
+                body: JSON.stringify(lesson),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            }).then(function (response) {
             return response.json();
         })
     }
@@ -32,12 +38,15 @@ export default class LessonService {
         })
     }
 
-    findAllLessonsForModule(moduleId) {
+    findAllLessonsForModule(courseId, moduleId) {
         return fetch(
-            LESSON_MID_URL
+            LESSON_CID_MID_URL
+                .replace('CID', courseId)
                 .replace('MID', moduleId))
             .then(function (response) {
-                return response.json();
+                return response.text().then(function (text) {
+                    return text ? JSON.parse(text) : []
+                });
             })
     }
 

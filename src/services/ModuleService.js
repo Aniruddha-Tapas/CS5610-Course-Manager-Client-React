@@ -37,7 +37,9 @@ export default class ModuleService {
             MODULE_CID_URL
                 .replace('CID', courseId))
             .then(function (response) {
-                return response.json();
+                return response.text().then(function (text) {
+                    return text ? JSON.parse(text) : []
+                });
             })
     }
 
@@ -50,7 +52,7 @@ export default class ModuleService {
 
     updateModule(moduleId, module) {
         return fetch(MODULE_URL + '/' + moduleId, {
-            method: 'put',
+            method: 'PUT',
             body: JSON.stringify(module),
             headers: {
                 'content-type': 'application/json'

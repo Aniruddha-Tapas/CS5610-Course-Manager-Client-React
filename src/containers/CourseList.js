@@ -5,6 +5,10 @@ import CourseService from "../services/CourseService";
 class CourseList extends React.Component {
     constructor() {
         super();
+        this.state = {
+            courses: [],
+            course: {title: ''}
+        };
         this.courseService = CourseService.instance;
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
@@ -24,6 +28,36 @@ class CourseList extends React.Component {
             })
     }
 
+    titleChanged(event) {
+        this.setState({
+            course: {title: event.target.value}
+        });
+    }
+
+    createCourse() {
+        if (this.state.course.title === "") {
+            this.courseService
+                .createCourse({title: 'Default Course'})
+                .then(() => {
+                    this.findAllCourses();
+                });
+        } else {
+            this.courseService
+                .createCourse(this.state.course)
+                .then(() => {
+                    this.findAllCourses();
+                });
+        }
+    }
+
+    deleteCourse(courseId) {
+        if (window.confirm("Do you want to delete this course?")) {
+            this.courseService
+                .deleteCourse(courseId)
+                .then(() => this.findAllCourses());
+        }
+    }
+
     renderCourseRows() {
         let courses = null;
 
@@ -35,32 +69,9 @@ class CourseList extends React.Component {
                     return <CourseRow key={course.id}
                                       course={course}
                                       delete={this.deleteCourse}/>
-                }
-                , this)
+                }, this);
         }
-        return (
-            courses
-        )
-    }
-
-    titleChanged(event) {
-        this.setState({
-            course: {title: event.target.value}
-        });
-    }
-
-    createCourse() {
-        this.courseService
-            .createCourse(this.state.course)
-            .then(() => {
-                this.findAllCourses();
-            });
-    }
-
-    deleteCourse(courseId) {
-        this.courseService
-            .deleteCourse(courseId)
-            .then(() => this.findAllCourses());
+        return (courses);
     }
 
     render() {

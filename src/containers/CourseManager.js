@@ -7,7 +7,7 @@ class CourseManager extends Component{
     render() {
         return (
             <Router>
-                <div style={{height: '100%'}}>
+                <div>
                     <Route path="/courses"
                            component={CourseList}>
                     </Route>
@@ -15,7 +15,6 @@ class CourseManager extends Component{
                     <Route path="/course/:courseId/edit"
                            component={CourseEditor}>
                     </Route>
-
                 </div>
             </Router>
         )
