@@ -24,7 +24,6 @@ class TopicPills extends Component {
     }
 
     componentDidMount() {
-        console.log("TopicPills componentDidMount");
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
         this.setLessonId(this.props.lessonId);
@@ -110,15 +109,11 @@ class TopicPills extends Component {
     renderListOfTopics() {
         let topics = null;
 
-        //console.log("renderListOfTopics", this.state.topics)
         if (this.state.topics) {
             topics = this.state.topics.map(
                 function (topic) {
                     return (<TopicPillItem key={topic.id}
                                            topic={topic}
-                                           courseId={this.state.courseId}
-                                           moduleId={this.state.moduleId}
-                                           lessonId={this.state.lessonId}
                                            delete={this.deleteTopic}/>)
                 }, this);
         }
@@ -126,10 +121,11 @@ class TopicPills extends Component {
     }
 
     render() {
+        console.log("TP")
         return (
-            <div style={{width: '100%', height: '100%'}}>
+            <div className="h-100 w-100">
                 <nav className="navbar justify-content-between">
-                    <form className="form-inline" style={{width: '100%'}}>
+                    <form className="form-inline w-100">
                         <input placeholder="New Topic Title"
                                className="form-control border"
                                onChange={this.setTopicTitle}
@@ -146,7 +142,7 @@ class TopicPills extends Component {
 
                 <hr className="bg-white"/>
 
-                <div className="container-fluid" style={{width: '100%', height: '100%'}}>
+                <div className="container-fluid h-100 w-100">
                     <ul className="nav nav-pills">
                         {this.renderListOfTopics()}
                     </ul>

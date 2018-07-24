@@ -42,21 +42,18 @@ class CourseEditor extends Component {
                     <div className="navbar navbar-dark bg-primary text-white mb-5 justify-content-between">
                         <h1>Course: {this.state.course.title}</h1>
                     </div>
-                    <div className="container-fluid" tyle={{height: '100%'}}>
+                    <div className="container-fluid h-100">
 
-                        <div className="row m-1" style={{height: '100%', width: '100%'}}>
-                            <div className="col-4 border border-primary shadow-lg p-3 mb-5 rounded" style={{height: '100%'}}>
+                        <div className="row m-1 h-100 w-100">
+                            <div className="col-4 border border-primary shadow-lg p-3 mb-5 rounded h-100">
                                 <ModuleList courseId={this.state.courseId}
                                             courseTitle={this.state.course.title}/>
                             </div>
-                            <div className="col-8" style={{height: '100%', width: '100%'}}>
+                            <div className="col-8 h-100 w-100">
                                 <Route path="/course/:courseId/edit/:moduleId/edit"
-                                       component={ModuleEditor}>
-                                </Route>
-
+                                       component={ModuleEditor}/>
                                 <Route path="/course/:courseId/edit/:moduleId/edit/:lessonId/edit"
-                                       component={LessonEditor}>
-                                </Route>
+                                       component={LessonEditor}/>
                             </div>
                         </div>
                     </div>

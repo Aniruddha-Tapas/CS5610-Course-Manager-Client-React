@@ -1,9 +1,6 @@
 const TOPIC_CID_MID_LID_URL =
     'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
 
-const TOPIC_LID_URL =
-    'http://localhost:8080/api/lesson/LID/topic';
-
 const TOPIC_URL = 'http://localhost:8080/api/topic';
 
 let _singleton = Symbol();

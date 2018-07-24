@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import CourseRow from "../components/CourseRow";
 import CourseService from "../services/CourseService";
 
-class CourseList extends React.Component {
+class CourseList extends Component {
     constructor() {
         super();
         this.state = {
@@ -79,7 +79,7 @@ class CourseList extends React.Component {
         return (
             <div className="bg-light">
                 <nav className="navbar navbar-dark bg-primary justify-content-between">
-                    <h1 style={{color: "white"}}>WhiteBoard</h1>
+                    <h1 className="text-white">WhiteBoard</h1>
                     <form className="form-inline">
                         <input onChange={this.titleChanged}
                                className="form-control mr-sm-2"

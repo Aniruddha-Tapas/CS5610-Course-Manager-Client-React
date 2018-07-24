@@ -15,7 +15,7 @@ class LessonEditor extends React.Component {
             module: '',
             course: '',
             lesson: ''
-        }
+        };
 
         this.lessonService = LessonService.instance;
         this.moduleService = ModuleService.instance;
@@ -29,7 +29,6 @@ class LessonEditor extends React.Component {
     }
 
     componentDidMount() {
-        console.log("LessonEditor componentDidMount");
         this.setCourse(this.props.match.params.courseId);
         this.setModule(this.props.match.params.moduleId);
         this.setLesson(this.props.match.params.lessonId);
@@ -85,7 +84,7 @@ class LessonEditor extends React.Component {
 
     render() {
         return (
-            <div className=" border border-primary shadow-lg p-3 mb-5 rounded container-fluid p-2" style={{height: '100%'}}>
+            <div className=" border border-primary shadow-lg p-3 mb-5 rounded container-fluid p-2 h-100">
                 <h4 className="container-fluid">Topics of Lesson: {this.state.lesson.title}</h4>
                 <TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
             </div>

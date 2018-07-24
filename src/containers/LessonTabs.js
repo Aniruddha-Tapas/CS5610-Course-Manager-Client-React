@@ -22,7 +22,6 @@ class LessonTabs extends Component {
     }
 
     componentDidMount() {
-        console.log("LessonTabs componentDidMount");
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
     }
@@ -85,10 +84,9 @@ class LessonTabs extends Component {
             });
     }
 
-    renderListOfLesson() {
+    renderListOfLessons() {
         let lessons = null;
 
-        //console.log("renderListOfLesson", this.state.lessons)
         if (this.state.lessons) {
             lessons = this.state.lessons.map(
                 function (lesson) {
@@ -105,9 +103,9 @@ class LessonTabs extends Component {
 
     render() {
         return (
-            <div style={{width: '100%', height: '100%'}}>
+            <div className="h-100 w-100">
                 <nav className="navbar justify-content-between">
-                    <form className="form-inline" style={{width: '100%'}}>
+                    <form className="form-inline w-100">
                         <input placeholder="New Lesson Title"
                                className="form-control border"
                                onChange={this.setLessonTitle}
@@ -123,9 +121,9 @@ class LessonTabs extends Component {
 
                 <hr className="bg-white"/>
 
-                <div className="container-fluid" style={{width: '100%', height: '100%'}}>
+                <div className="container-fluid h-100 w-100">
                     <ul className="nav nav-tabs">
-                        {this.renderListOfLesson()}
+                        {this.renderListOfLessons()}
                     </ul>
                 </div>
 

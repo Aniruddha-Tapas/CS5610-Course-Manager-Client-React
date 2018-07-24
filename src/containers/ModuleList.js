@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Route, Redirect, Switch} from 'react-router';
 import ModuleService from '../services/ModuleService';
 import ModuleListItem from '../components/ModuleListItem';
 
@@ -10,8 +9,7 @@ class ModuleList extends Component {
             courseId: '',
             courseTitle: '',
             module: {title: ''},
-            modules: [],
-            moduleDeleted: false
+            modules: []
         };
         this.moduleService = ModuleService.instance;
         this.createModule = this.createModule.bind(this);
@@ -21,7 +19,6 @@ class ModuleList extends Component {
     }
 
     componentDidMount() {
-        console.log("ModuleList componentDidMount");
         this.setCourseId(this.props.courseId);
         this.setCourseTitle(this.props.courseTitle);
     }
@@ -48,7 +45,7 @@ class ModuleList extends Component {
         if (window.confirm("Do you want to delete this module?")) {
             this.moduleService
                 .deleteModule(moduleId)
-                .then(() => this.findAllModulesForCourse(this.state.courseId, true))
+                .then(() => this.findAllModulesForCourse(this.state.courseId));
         }
     }
 
@@ -72,33 +69,27 @@ class ModuleList extends Component {
         });
     }
 
-    findAllModulesForCourse(courseId, moduleDeleted = false) {
+    findAllModulesForCourse(courseId) {
         this.moduleService
             .findAllModulesForCourse(courseId)
             .then((modules) => {
-                this.setState({modules: modules, moduleDeleted: moduleDeleted})
+                this.setState({modules: modules})
             });
     }
 
     renderListOfModules() {
         let modules = null;
 
-        //console.log("renderListOfModules", this.state.modules);
         if (this.state) {
             modules = this.state.modules.map(
                 function (module) {
                     return (<ModuleListItem key={module.id}
                                             module={module}
                                             courseId={this.state.courseId}
-                                            moduleDeleted={this.state.moduleDeleted}
                                             delete={this.deleteModule}/>)
                 }, this);
         }
         return (modules);
-    }
-
-    goHome() {
-        this.props.history.push('/course/' + this.state.courseId + '/edit');
     }
 
     render() {
