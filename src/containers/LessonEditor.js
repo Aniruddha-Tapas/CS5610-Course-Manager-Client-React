@@ -1,8 +1,16 @@
 import React from 'react'
 import ModuleService from '../services/ModuleService';
 import CourseService from '../services/CourseService';
-import LessonService from  '../services/LessonService';
+import LessonService from '../services/LessonService';
 import TopicPills from "./TopicPills";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import {widgetReducer} from "../reducers/widgetReducer";
+import App from './widgetList';
+
+
+let store = createStore(widgetReducer);
 
 class LessonEditor extends React.Component {
 
@@ -84,10 +92,22 @@ class LessonEditor extends React.Component {
 
     render() {
         return (
-            <div className=" border border-primary shadow-lg p-3 mb-5 rounded container-fluid p-2 h-100">
-                <h4 className="container-fluid">Topics of Lesson: {this.state.lesson.title}</h4>
-                <TopicPills courseId={this.state.courseId} moduleId={this.state.moduleId} lessonId={this.state.lessonId}/>
-            </div>
+            <Router>
+                <div className=" border border-primary shadow-lg p-3 mb-5 rounded container-fluid p-2 h-100">
+                    <h4 className="container-fluid">Topics of Lesson: {this.state.lesson.title}</h4>
+                    <div>
+                        <TopicPills courseId={this.state.courseId}
+                                    moduleId={this.state.moduleId}
+                                    lessonId={this.state.lessonId}/>
+                    </div>
+                    <div className="h-100">
+                        <Provider store={store}>
+                            <Route path="/course/:courseId/edit/:moduleId/edit/:lessonId/edit/:topicsId/edit"
+                                   component={App}/>
+                        </Provider>
+                    </div>
+                </div>
+            </Router>
         )
     }
 }

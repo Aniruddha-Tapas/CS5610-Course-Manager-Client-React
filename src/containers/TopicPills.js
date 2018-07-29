@@ -114,6 +114,9 @@ class TopicPills extends Component {
                 function (topic) {
                     return (<TopicPillItem key={topic.id}
                                            topic={topic}
+                                           courseId = {this.state.courseId}
+                                           moduleId = {this.state.moduleId}
+                                           lessonId = {this.state.lessonId}
                                            delete={this.deleteTopic}/>)
                 }, this);
         }
@@ -121,7 +124,6 @@ class TopicPills extends Component {
     }
 
     render() {
-        console.log("TP")
         return (
             <div className="h-100 w-100">
                 <nav className="navbar justify-content-between">

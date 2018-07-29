@@ -1,7 +1,7 @@
 import React from 'react'
-import LessonTabs from './LessonTabs'
 import ModuleService from '../services/ModuleService';
 import CourseService from '../services/CourseService';
+import LessonTabs from './LessonTabs'
 
 class ModuleEditor extends React.Component {
 

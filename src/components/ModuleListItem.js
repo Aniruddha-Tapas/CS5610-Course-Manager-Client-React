@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 class ModuleListItem extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <li className="list-group-item list-group-item-action m-1 rounded">
