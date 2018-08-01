@@ -108,8 +108,8 @@ export const selectWidgetType = (dispatch, widgetId, widgetType) => (
     })
 );
 
-export const findAllWidgetsForLessonId = (dispatch, lessonId) => {
-    fetch('http://localhost:8080/api/lesson/'+lessonId+"/widget")
+export const findAllWidgetsForTopicId = (dispatch, topicId) => {
+    fetch('http://localhost:8080/api/topic/'+topicId+"/widget")
         .then(response => (response.json()))
         .then(widgets => dispatch({
             type: constants.FIND_ALL_WIDGETS,
@@ -122,10 +122,10 @@ export const addWidget = dispatch => (
     })
 );
 
-export const save = (dispatch, lessonId) => (
+export const save = (dispatch, topicId) => (
     dispatch({
         type: constants.SAVE,
-        lessonId: lessonId
+        topicId: topicId
     })
 );
 

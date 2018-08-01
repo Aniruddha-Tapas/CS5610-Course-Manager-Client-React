@@ -4,19 +4,24 @@ import * as actions from "../actions"
 import WidgetContainer from './widgetContainer'
 
 
-let lessonId;
+let topicId;
 
 class WidgetList extends Component {
     constructor(props) {
         super(props);
-        lessonId = this.props.match.params.lessonId;
-        this.props.findAllWidgetsForLessonId(lessonId);
+
+        console.log("WidgetList", props);
+
+        topicId = this.props.match.params.topicId;
+        this.props.findAllWidgetsForTopicId(topicId);
     }
 
     componentDidUpdate(newProps){
-        if(this.props.match.params.lessonId !== newProps.match.params.lessonId) {
-            lessonId = this.props.match.params.lessonId;
-            this.props.findAllWidgetsForLessonId(lessonId);
+        console.log("NewWidgetList", newProps);
+
+        if(this.props.match.params.topicId !== newProps.match.params.topicId) {
+            topicId = this.props.match.params.topicId;
+            this.props.findAllWidgetsForTopicId(topicId);
         }
     }
 
@@ -67,9 +72,9 @@ const stateToPropertiesMapper = (state) => ({
 });
 
 const dispatcherToPropsMapper = dispatch => ({
-    findAllWidgetsForLessonId: () => actions.findAllWidgetsForLessonId(dispatch, lessonId),
+    findAllWidgetsForTopicId: () => actions.findAllWidgetsForTopicId(dispatch, topicId),
     addWidget: () => actions.addWidget(dispatch),
-    save: () => actions.save(dispatch, lessonId),
+    save: () => actions.save(dispatch, topicId),
     preview: () => actions.preview(dispatch)
 });
 
