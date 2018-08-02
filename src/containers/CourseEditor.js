@@ -5,7 +5,6 @@ import ModuleList from './ModuleList';
 import ModuleEditor from './ModuleEditor';
 import LessonEditor from "./LessonEditor";
 
-
 class CourseEditor extends Component {
 
     constructor(props) {

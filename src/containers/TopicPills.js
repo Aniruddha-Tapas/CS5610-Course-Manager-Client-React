@@ -141,7 +141,6 @@ class TopicPills extends Component {
                     </form>
                 </nav>
 
-
                 <hr className="bg-white"/>
 
                 <div className="container-fluid h-100 w-100">

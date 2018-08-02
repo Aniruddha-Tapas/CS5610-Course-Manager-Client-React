@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import * as actions from "../actions"
 import WidgetContainer from './widgetContainer'
@@ -6,19 +6,14 @@ import WidgetContainer from './widgetContainer'
 
 let topicId;
 
-class WidgetList extends Component {
+class WidgetList extends React.Component {
     constructor(props) {
         super(props);
-
-        console.log("WidgetList", props);
-
         topicId = this.props.match.params.topicId;
         this.props.findAllWidgetsForTopicId(topicId);
     }
 
     componentDidUpdate(newProps){
-        console.log("NewWidgetList", newProps);
-
         if(this.props.match.params.topicId !== newProps.match.params.topicId) {
             topicId = this.props.match.params.topicId;
             this.props.findAllWidgetsForTopicId(topicId);
@@ -27,9 +22,9 @@ class WidgetList extends Component {
 
     render() {
         return(
-            <div className="clearfix container-fluid">
-                <nav className="navbar navbar-light justify-content-between" style={{backgroundColor: "#6c757d"}}>
-                    <span className="navbar-brand text-white">Widget List</span>
+            <div className="clearfix container-fluid border border-secondary shadow-lg p-2 mt-2 rounded">
+                <nav className="navbar navbar-light justify-content-between">
+                    <span className="navbar-brand">Widget List</span>
                     <form className="form-inline">
                         <button className="btn-success btn"
                             // hidden={this.props.previewMode}
@@ -38,7 +33,7 @@ class WidgetList extends Component {
                             Save
                         </button>
                         &nbsp;
-                        <label className="text-white">Preview</label>
+                        <label className="">Preview</label>
                         &nbsp;
                         <label className="switch pull-right my-auto">
                             <input type="checkbox" onClick={this.props.preview} />
@@ -56,8 +51,8 @@ class WidgetList extends Component {
                         ))}
                     </ul>
                 </div>
-                <div className="clearfix">
-                    <button className="btn fa fa-plus-circle btn-danger pull-right"
+                <div className="clearfix container-fluid">
+                    <button className="btn fa fa-plus-circle btn-danger float-right"
                             type="button"
                             onClick={this.props.addWidget}/>
                 </div>

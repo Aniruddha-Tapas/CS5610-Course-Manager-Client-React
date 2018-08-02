@@ -100,7 +100,7 @@ class LessonEditor extends React.Component {
                                     moduleId={this.state.moduleId}
                                     lessonId={this.state.lessonId}/>
                     </div>
-                    <div className="h-100">
+                    <div className="h-100 m-3">
                         <Provider store={store}>
                             <Route path="/course/:courseId/edit/:moduleId/edit/:lessonId/edit/:topicId/edit"
                                    component={App}/>

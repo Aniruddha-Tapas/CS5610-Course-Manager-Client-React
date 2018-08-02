@@ -5,7 +5,7 @@ class TopicPillItem extends React.Component {
     render() {
         return (
             <li className="nav-item">
-                <Link className="nav-link text-dark"
+                <Link className="nav-link text-primary"
                       to={`/course/${this.props.courseId}/edit/${this.props.moduleId}/edit/${this.props.lessonId}/edit/${this.props.topic.id}/edit`}>
                     {this.props.topic.title}
                     <span className="float-right">

@@ -1,5 +1,30 @@
 import * as constants from "../constants/index"
 
+export const addWidget = dispatch => (
+    dispatch({type: constants.ADD_WIDGET
+    })
+);
+
+export const selectWidgetType = (dispatch, widgetId, widgetType) => (
+    dispatch({
+        type: constants.SELECT_WIDGET_TYPE,
+        id: widgetId,
+        widgetType: widgetType
+    })
+);
+
+export const preview = dispatch => (
+    dispatch({type: constants.PREVIEW
+    })
+);
+
+export const save = (dispatch, topicId) => (
+    dispatch({
+        type: constants.SAVE,
+        topicId: topicId
+    })
+);
+
 export const headingTextChanged = (dispatch, widgetId, newText) => (
     dispatch({
         type: constants.HEADING_TEXT_CHANGED,
@@ -32,14 +57,6 @@ export const paragraphTextChanged = (dispatch, widgetId, newText) => (
     })
 );
 
-export const imageSrcChanged = (dispatch, widgetId, newSrc) => (
-    dispatch({
-        type: constants.IMAGE_SRC_CHANGED,
-        id: widgetId,
-        src: newSrc
-    })
-);
-
 export const listTextChanged = (dispatch, widgetId, newList) => (
     dispatch({
         type: constants.LIST_TEXT_CHANGED,
@@ -53,6 +70,14 @@ export const listTypeChanged = (dispatch, widgetId, newListType) => (
         type: constants.LIST_TYPE_CHANGED,
         id: widgetId,
         listType: newListType
+    })
+);
+
+export const imageSrcChanged = (dispatch, widgetId, newSrc) => (
+    dispatch({
+        type: constants.IMAGE_SRC_CHANGED,
+        id: widgetId,
+        src: newSrc
     })
 );
 
@@ -80,16 +105,16 @@ export const deleteWidget = (dispatch, widgetId, orderNumber) => (
     })
 );
 
-export const orderDecrease = (dispatch, widgetOrder) => (
+export const orderIncrease = (dispatch, widgetOrder) => (
     dispatch({
-        type: constants.ORDER_DECREASE,
+        type: constants.ORDER_INCREASE,
         orderNumber: widgetOrder
     })
 );
 
-export const orderIncrease = (dispatch, widgetOrder) => (
+export const orderDecrease = (dispatch, widgetOrder) => (
     dispatch({
-        type: constants.ORDER_INCREASE,
+        type: constants.ORDER_DECREASE,
         orderNumber: widgetOrder
     })
 );
@@ -100,13 +125,6 @@ export const widgetSortByOrder = (dispatch) => (
     })
 );
 
-export const selectWidgetType = (dispatch, widgetId, widgetType) => (
-    dispatch({
-        type: constants.SELECT_WIDGET_TYPE,
-        id: widgetId,
-        widgetType: widgetType
-    })
-);
 
 export const findAllWidgetsForTopicId = (dispatch, topicId) => {
     fetch('http://localhost:8080/api/topic/'+topicId+"/widget")
@@ -116,20 +134,3 @@ export const findAllWidgetsForTopicId = (dispatch, topicId) => {
             widgets: widgets
         }))
 };
-
-export const addWidget = dispatch => (
-    dispatch({type: constants.ADD_WIDGET
-    })
-);
-
-export const save = (dispatch, topicId) => (
-    dispatch({
-        type: constants.SAVE,
-        topicId: topicId
-    })
-);
-
-export const preview = dispatch => (
-    dispatch({type: constants.PREVIEW
-    })
-);
