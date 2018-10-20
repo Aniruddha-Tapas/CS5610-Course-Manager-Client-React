@@ -127,7 +127,7 @@ export const widgetSortByOrder = (dispatch) => (
 
 
 export const findAllWidgetsForTopicId = (dispatch, topicId) => {
-    fetch('http://localhost:8080/api/topic/'+topicId+"/widget")
+    fetch('https://cs5610-whiteboard-server-java.herokuapp.com/api/topic/'+topicId+"/widget")
         .then(response => (response.json()))
         .then(widgets => dispatch({
             type: constants.FIND_ALL_WIDGETS,
