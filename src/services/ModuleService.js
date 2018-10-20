@@ -1,7 +1,7 @@
 const MODULE_CID_URL =
-    'http://localhost:8080/api/course/CID/module';
+    'https://cs5610-whiteboard-server-java.herokuapp.com/api/course/CID/module';
 
-const MODULE_URL = 'http://localhost:8080/api/module';
+const MODULE_URL = 'https://cs5610-whiteboard-server-java.herokuapp.com/api/module';
 
 let _singleton = Symbol();
 export default class ModuleService {
