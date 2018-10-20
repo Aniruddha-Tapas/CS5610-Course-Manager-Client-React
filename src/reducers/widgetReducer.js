@@ -46,7 +46,7 @@ export const widgetReducer = (state = {widgets: [], preview: false, length: 0}, 
             };
 
         case constants.SAVE:
-            fetch('http://localhost:8080/api/topic/' + action.topicId + "/widget", {
+            fetch('https://cs5610-whiteboard-server-java.herokuapp.com/api/topic/' + action.topicId + "/widget", {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {
