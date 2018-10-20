@@ -1,7 +1,7 @@
 const TOPIC_CID_MID_LID_URL =
-    'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
+    'https://cs5610-whiteboard-server-java.herokuapp.com/api/course/CID/module/MID/lesson/LID/topic';
 
-const TOPIC_URL = 'http://localhost:8080/api/topic';
+const TOPIC_URL = 'https://cs5610-whiteboard-server-java.herokuapp.com/api/topic';
 
 let _singleton = Symbol();
 export default class TopicService {
