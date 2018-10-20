@@ -1,5 +1,5 @@
 const LESSON_CID_MID_URL =
-    'http://localhost:8080/api/course/CID/module/MID/lesson';
+    'https://cs5610-whiteboard-server-java.herokuapp.com/api/course/CID/module/MID/lesson';
 
 const LESSON_URL = 'https://cs5610-whiteboard-server-java.herokuapp.com/api/lesson';
 
