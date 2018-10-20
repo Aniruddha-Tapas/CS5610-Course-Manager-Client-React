@@ -1,7 +1,7 @@
 const LESSON_CID_MID_URL =
     'http://localhost:8080/api/course/CID/module/MID/lesson';
 
-const LESSON_URL = 'http://localhost:8080/api/lesson';
+const LESSON_URL = 'https://cs5610-whiteboard-server-java.herokuapp.com/api/lesson';
 
 let _singleton = Symbol();
 export default class LessonService {
