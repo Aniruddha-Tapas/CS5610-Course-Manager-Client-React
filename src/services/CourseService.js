@@ -1,6 +1,6 @@
 let _singleton = Symbol();
 const COURSE_API_URL =
-    'http://localhost:8080/api/course';
+    'https://cs5610-whiteboard-server-java.herokuapp.com/api/course';
 
 class CourseService {
     constructor(singletonToken) {
